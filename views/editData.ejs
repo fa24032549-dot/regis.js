@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <title>ระบบแก้ไขข้อมูลสมาชิก</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 8% 8%, rgba(99, 102, 241, 0.13), transparent 28rem),
+        linear-gradient(145deg, #f5f7ff 0%, #f8fafc 55%, #eef2ff 100%);
+      color: #172554;
+    }
+
+    .edit-page {
+      max-width: 860px;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    .edit-card {
+      overflow: hidden;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 1.25rem;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 24px 60px rgba(30, 41, 59, 0.1);
+    }
+
+    .edit-card-header {
+      padding: 2rem 2.25rem;
+      background: linear-gradient(120deg, #312e81, #4f46e5 62%, #6366f1);
+      color: #fff;
+    }
+
+    .edit-card-header p {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .edit-card-body {
+      padding: 2.25rem;
+    }
+
+    .form-label {
+      margin-bottom: 0.5rem;
+      color: #334155;
+      font-size: 0.925rem;
+      font-weight: 600;
+    }
+
+    .form-control {
+      min-height: 48px;
+      border-color: #dbe2ef;
+      border-radius: 0.7rem;
+      color: #1e293b;
+    }
+
+    .form-control:focus {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 0.22rem rgba(99, 102, 241, 0.14);
+    }
+
+    .form-control[readonly] {
+      background-color: #f1f5f9;
+      color: #64748b;
+    }
+
+    .btn {
+      min-height: 46px;
+      border-radius: 0.7rem;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      border-color: #4f46e5;
+      background-color: #4f46e5;
+    }
+
+    .btn-primary:hover {
+      border-color: #4338ca;
+      background-color: #4338ca;
+    }
+
+    @media (max-width: 575.98px) {
+      .edit-page {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+      }
+
+      .edit-card-header,
+      .edit-card-body {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<main class="container edit-page">
+  <section class="edit-card">
+    <header class="edit-card-header">
+      <span class="badge rounded-pill text-bg-light text-primary mb-3">ข้อมูลสมาชิก</span>
+      <h1 class="h3 fw-bold mb-2">แก้ไขข้อมูลนักศึกษา</h1>
+      <p class="mb-0">ปรับปรุงรายละเอียดให้เป็นปัจจุบัน แล้วกดบันทึกการแก้ไข</p>
+    </header>
+
+    <div class="edit-card-body">
+      <form action="/updatedata" method="post">
+        <div class="row g-4">
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="stCode">รหัสนักศึกษา</label>
+            <input type="text" class="form-control" id="stCode" name="stCode" value="<%= student.stCode %>" readonly>
+            <div class="form-text">รหัสนักศึกษาไม่สามารถแก้ไขได้</div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="stName">ชื่อ-นามสกุล</label>
+            <input type="text" class="form-control" id="stName" placeholder="กรอกชื่อ-นามสกุล" name="stName" value="<%= student.stName %>">
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="stMajor">สาขาวิชา</label>
+            <input type="text" class="form-control" id="stMajor" placeholder="กรอกสาขาวิชา" name="stMajor" value="<%= student.stMajor %>">
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="stAddress">ที่อยู่</label>
+            <input type="text" class="form-control" id="stAddress" placeholder="กรอกที่อยู่เป็นชื่อจังหวัด" name="stAddress" value="<%= student.stAddress %>">
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="stPhone">เบอร์โทร</label>
+            <input type="text" class="form-control" id="stPhone" placeholder="กรอกเบอร์โทร" name="stPhone" value="<%= student.stPhone %>">
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="stEmail">อีเมล</label>
+            <input type="email" class="form-control" id="stEmail" placeholder="กรอกอีเมล" name="stEmail" value="<%= student.stEmail %>">
+          </div>
+        </div>
+
+        <div class="d-flex flex-column-reverse flex-sm-row justify-content-sm-end gap-2 border-top mt-4 pt-4">
+          <a href="/showData" class="btn btn-outline-secondary px-4">ยกเลิก</a>
+          <button type="submit" class="btn btn-primary px-4">บันทึกการแก้ไข</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>
